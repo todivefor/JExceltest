@@ -19,6 +19,7 @@ import jxl.write.WritableWorkbook;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jxl.write.DateTime;
+import jxl.write.WritableCellFormat;
 import jxl.write.WriteException;
 
 
@@ -37,6 +38,8 @@ public class JExcelTest
         try
         {
             WritableWorkbook workbook = Workbook.createWorkbook(new File("JExceltest.xls"));
+            WritableCellFormat dateCellFormatMDY = new WritableCellFormat
+                (new jxl.write.DateFormat("mm/dd/yy"));                     // Used to format date
             
             WritableSheet sheet = workbook.createSheet("First Sheet", 0);
             int col = 0;
@@ -67,7 +70,7 @@ public class JExcelTest
             }
             col = 0;
             row = 10;
-            DateTime date = new DateTime(col, row, startDate);
+            DateTime date = new DateTime(col, row, startDate, dateCellFormatMDY);
             sheet.addCell(date);
             workbook.write();
             workbook.close();
